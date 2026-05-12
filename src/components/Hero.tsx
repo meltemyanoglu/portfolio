@@ -142,6 +142,8 @@ export default function Hero() {
             {sticker("Flutter", "bg-cobalt text-cream", "rotate-1")}
             {sticker("Next.js", "bg-hot-pink text-cream", "-rotate-1")}
             {sticker("PyTorch", "bg-neon-lime", "rotate-2")}
+            {sticker("Computer Vision", "bg-sunny", "rotate-1")}
+            {sticker("Generative AI", "bg-cobalt text-cream", "rotate-2")}
           </div>
         </motion.div>
 

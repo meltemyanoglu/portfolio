@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { Github, ExternalLink, ArrowUpRight, ChevronDown } from "lucide-react";
 
+/* ─── Ana 4 proje ─────────────────────────────────────────────────────────── */
 const projects = [
   {
     id: "01",
@@ -133,7 +134,50 @@ const projects = [
   },
 ];
 
-function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
+/* ─── Ek projeler — buraya kendi projelerini ekle ─────────────────────────── */
+const extraProjects = [
+  {
+    id: "05",
+    title: "Proje Adı",           // ← değiştir
+    subtitle: "Kısa açıklama",    // ← değiştir
+    description:
+      "Projen hakkında bir iki cümle yaz. Ne yaptı, hangi problemi çözdü, ne öğretti.",
+    tags: ["Flutter", "Firebase"],  // ← değiştir
+    github: "https://github.com/meltemyanoglu",
+    live: null,
+    bg: "bg-sage",
+    text: "text-cream",
+    accent: "bg-neon-lime text-ink",
+    visual: (
+      <div className="w-full h-full flex items-center justify-center">
+        <span className="font-display font-black text-6xl text-cream/20">05</span>
+      </div>
+    ),
+  },
+  {
+    id: "06",
+    title: "Proje Adı",           // ← değiştir
+    subtitle: "Kısa açıklama",    // ← değiştir
+    description:
+      "Projen hakkında bir iki cümle yaz. Ne yaptı, hangi problemi çözdü, ne öğretti.",
+    tags: ["React", "TypeScript"],  // ← değiştir
+    github: "https://github.com/meltemyanoglu",
+    live: null,
+    bg: "bg-ink",
+    text: "text-cream",
+    accent: "bg-sunny text-ink",
+    visual: (
+      <div className="w-full h-full flex items-center justify-center">
+        <span className="font-display font-black text-6xl text-cream/20">06</span>
+      </div>
+    ),
+  },
+];
+
+/* ─── Kart bileşeni ───────────────────────────────────────────────────────── */
+type Project = (typeof projects)[0];
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -148,10 +192,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
       {/* Visual area */}
       <div className="h-48 border-b-2 border-ink relative overflow-hidden">
         {project.visual}
-        {/* Project number */}
-        <span
-          className={`absolute top-3 left-3 font-mono font-bold text-xs ${project.text} opacity-50`}
-        >
+        <span className={`absolute top-3 left-3 font-mono font-bold text-xs ${project.text} opacity-50`}>
           {project.id}
         </span>
       </div>
@@ -162,9 +203,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
           <p className={`font-mono text-xs uppercase tracking-widest ${project.text} opacity-60 mb-1`}>
             {project.subtitle}
           </p>
-          <h3
-            className={`font-display font-black text-3xl uppercase leading-tight ${project.text}`}
-          >
+          <h3 className={`font-display font-black text-3xl uppercase leading-tight ${project.text}`}>
             {project.title}
           </h3>
         </div>
@@ -173,7 +212,6 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
           {project.description}
         </p>
 
-        {/* Tags */}
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
@@ -185,7 +223,6 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
           ))}
         </div>
 
-        {/* Links */}
         <div className="flex gap-3 pt-2 border-t-2 border-ink/20">
           {project.github && (
             <a
@@ -212,7 +249,6 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
         </div>
       </div>
 
-      {/* Corner arrow on hover */}
       <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
         <div className={`w-8 h-8 ${project.accent} border-2 border-ink flex items-center justify-center`}>
           <ArrowUpRight size={14} strokeWidth={2.5} />
@@ -222,14 +258,17 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   );
 }
 
+/* ─── Ana bölüm ───────────────────────────────────────────────────────────── */
 export default function Works() {
   const headingRef = useRef<HTMLDivElement>(null);
   const headingInView = useInView(headingRef, { once: true, margin: "-60px" });
+  const [showAll, setShowAll] = useState(false);
 
   return (
     <section id="works" className="bg-cream border-t-2 border-ink py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-        {/* Section heading */}
+
+        {/* Başlık */}
         <div ref={headingRef} className="mb-16">
           <motion.p
             initial={{ opacity: 0, x: -20 }}
@@ -249,26 +288,67 @@ export default function Works() {
               style={{ fontSize: "clamp(3rem, 7vw, 8rem)", letterSpacing: "-0.03em" }}
             >
               THINGS{" "}
-              <span
-                style={{
-                  WebkitTextStroke: "2px #0A0A0A",
-                  color: "transparent",
-                }}
-              >
+              <span style={{ WebkitTextStroke: "2px #0A0A0A", color: "transparent" }}>
                 I BUILT
               </span>
             </motion.h2>
           </div>
         </div>
 
-        {/* Grid */}
+        {/* Ana 4 kart */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}
         </div>
 
-        {/* CTA */}
+        {/* See All butonu */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="mt-10 flex justify-center"
+        >
+          <button
+            onClick={() => setShowAll((v) => !v)}
+            className="group flex items-center gap-3 px-8 py-4 bg-cream text-ink font-bold uppercase tracking-widest text-sm border-2 border-ink shadow-hard hover:-translate-x-1 hover:-translate-y-1 hover:shadow-hard-lg hover:bg-ink hover:text-cream transition-all duration-200"
+          >
+            <span>
+              {showAll
+                ? "Show Less"
+                : `See All Projects (${extraProjects.length + projects.length})`}
+            </span>
+            <motion.div
+              animate={{ rotate: showAll ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown size={18} strokeWidth={2.5} />
+            </motion.div>
+          </button>
+        </motion.div>
+
+        {/* Açılan ek kartlar */}
+        <AnimatePresence>
+          {showAll && (
+            <motion.div
+              key="extra"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                {extraProjects.map((project, i) => (
+                  <ProjectCard key={project.id} project={project} index={i} />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* GitHub linki */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -287,6 +367,7 @@ export default function Works() {
             <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
         </motion.div>
+
       </div>
     </section>
   );
