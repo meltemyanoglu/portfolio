@@ -5,24 +5,21 @@ import { useRef } from "react";
 
 const facts = [
   { label: "Degree", value: "Computer Engineering" },
-  { label: "Focus", value: "AI + Mobile + Web" },
-  { label: "Based", value: "Turkey" },
+  { label: "Focus",  value: "AI + Mobile + Web" },
+  { label: "Based",  value: "Padua" },
   { label: "Status", value: "Open to Work ✦" },
 ];
 
+
+
+/* ─── Ana bölüm ───────────────────────────────────────────────────────────── */
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const tickerItems = [
-    "Computer Engineering",
-    "AI Research",
-    "Mobile Development",
-    "Web Design",
-    "Creative Technology",
-    "Machine Learning",
-    "Flutter",
-    "Next.js",
+    "Computer Engineering", "AI Research", "Mobile Development",
+    "Web Design", "Creative Technology", "Machine Learning", "Flutter", "Next.js",
   ];
 
   return (
@@ -31,7 +28,7 @@ export default function About() {
         ref={ref}
         className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20"
       >
-        {/* Label */}
+        {/* Etiket */}
         <motion.p
           initial={{ opacity: 0, x: -20 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -43,39 +40,29 @@ export default function About() {
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left: accent block + facts */}
-          <div>
-            {/* Accent bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-4 mb-10"
-            >
-              <div className="w-2 h-16 bg-neon-lime" />
-              <div>
-                <p className="font-display font-black text-4xl text-cream leading-none">Meltem</p>
-                <p className="font-display font-black text-4xl text-cream/30 leading-none">Yanoglu</p>
-              </div>
-            </motion.div>
 
-            {/* Fact grid */}
+          {/* Sol: fact grid + yürüyen kedi */}
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="grid grid-cols-2 gap-4"
             >
               {facts.map((f) => (
-                <div key={f.label} className="border border-cream/20 p-4 hover:border-neon-lime transition-colors duration-200">
+                <div
+                  key={f.label}
+                  className="border border-cream/20 p-4 hover:border-neon-lime transition-colors duration-200"
+                >
                   <p className="font-mono text-xs uppercase tracking-widest text-cream/40 mb-1">{f.label}</p>
                   <p className="font-display font-bold text-sm text-cream">{f.value}</p>
                 </div>
               ))}
             </motion.div>
+
           </div>
 
-          {/* Right: bio */}
+          {/* Sağ: bio */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -115,7 +102,6 @@ export default function About() {
               obsessing over type, or hunting for the intersection where technology becomes art.
             </p>
 
-            {/* CTA buttons */}
             <div className="flex flex-wrap gap-4 pt-2">
               <a
                 href="#contact"
@@ -135,7 +121,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* Ticker strip at bottom */}
+      {/* Ticker */}
       <div className="mt-20 border-t border-cream/10 pt-6 overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
