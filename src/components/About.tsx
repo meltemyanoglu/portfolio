@@ -41,8 +41,10 @@ export default function About() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          {/* Sol: fact grid + yürüyen kedi */}
-          <div>
+          {/* Sol: fact grid + stats + currently */}
+          <div className="flex flex-col gap-8">
+
+            {/* Fact grid */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -59,6 +61,7 @@ export default function About() {
                 </div>
               ))}
             </motion.div>
+
 
           </div>
 
