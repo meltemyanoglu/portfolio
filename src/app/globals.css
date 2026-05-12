@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-syne: "Syne", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F2EDE4;
+  color: #0A0A0A;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #FF3CAC;
+  color: #F2EDE4;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F2EDE4;
+}
+::-webkit-scrollbar-thumb {
+  background: #0A0A0A;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF3CAC;
+}
+
+@layer utilities {
+  .clip-badge {
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+}
