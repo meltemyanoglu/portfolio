@@ -27,15 +27,6 @@ export default function About() {
 
   return (
     <section id="about" className="relative bg-ink text-cream overflow-hidden py-20 md:py-28">
-      {/* Decorative large letter */}
-      <div
-        className="absolute top-0 right-0 font-display font-black leading-none select-none pointer-events-none opacity-5"
-        style={{ fontSize: "clamp(12rem, 35vw, 40rem)", lineHeight: 0.85 }}
-        aria-hidden="true"
-      >
-        M
-      </div>
-
       <div
         ref={ref}
         className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20"
@@ -52,29 +43,20 @@ export default function About() {
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left: big initial + facts */}
+          {/* Left: accent block + facts */}
           <div>
-            {/* Giant M */}
+            {/* Accent bar */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative inline-block mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-4 mb-10"
             >
-              <div
-                className="font-display font-black leading-none"
-                style={{
-                  fontSize: "clamp(6rem, 18vw, 18rem)",
-                  WebkitTextStroke: "2px #B5FF39",
-                  color: "transparent",
-                  letterSpacing: "-0.05em",
-                }}
-              >
-                M
+              <div className="w-2 h-16 bg-neon-lime" />
+              <div>
+                <p className="font-display font-black text-4xl text-cream leading-none">Meltem</p>
+                <p className="font-display font-black text-4xl text-cream/30 leading-none">Yanoglu</p>
               </div>
-              {/* Decorative dots */}
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-hot-pink border-2 border-cream rounded-full" />
-              <div className="absolute bottom-4 -left-3 w-4 h-4 bg-sunny border-2 border-cream" />
             </motion.div>
 
             {/* Fact grid */}
